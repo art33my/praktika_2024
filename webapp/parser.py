@@ -43,7 +43,9 @@ def get_vacancies(keyword, min_salary=None, experience=None, max_results=500):
                     connection_timeout=10
                 )
                 cursor = connection.cursor()
-
+                # Очистка базы данных перед добавлением новых данных (только для тестирования)
+                cursor.execute("DELETE FROM vacancies")
+                connection.commit()
                 cursor.execute("""
                     CREATE TABLE IF NOT EXISTS vacancies (
                         id VARCHAR(255) PRIMARY KEY,
